@@ -1,6 +1,6 @@
 {
   "name": "giscube-geoportal",
-  "version": "2.1.2-2",
+  "version": "3.0.0",
   "description": "Generic Geoportal based on Giscube",
   "productName": "Giscube Geoportal",
   "cordovaId": "org.giscube.geoportal.app",
