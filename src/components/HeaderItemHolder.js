@@ -1,12 +1,12 @@
 import { QSeparator, QSpace } from 'quasar'
 
 import HeaderItem from './HeaderItem.vue'
+import HeaderDropdown from './HeaderDropdown.vue'
 
 export default {
   functional: true,
   props: {
     item: {
-      type: Object,
       required: true
     },
     menu: {
@@ -15,7 +15,27 @@ export default {
     }
   },
   render (createElement, { data, props, listeners }) {
-    if (props.item.separator) {
+    if (Array.isArray(props.item)) {
+      const p = {
+        name: props.item[0].name,
+        tool: props.item[0].tool,
+        dropdown: props.item.slice(1),
+        menu: props.menu
+      }
+
+      // forward events
+      const on = {
+        'sidebar-visibility-changed': value => listeners['sidebar-visibility-changed'](value),
+        event: value => listeners.event(value)
+      }
+
+      const component = props.item[0].tool.headerComponent || HeaderDropdown
+      return createElement(component, {
+        ...data,
+        props: p,
+        on
+      })
+    } else if (props.item.separator) {
       if (props.menu) {
         return null
       } else {

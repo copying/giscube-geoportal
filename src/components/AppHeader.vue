@@ -94,7 +94,12 @@ export default {
       let addSeparator = separators
       const r = []
       list.forEach((toolName, i) => {
-        if (toolName.startsWith('-')) {
+        if (Array.isArray(toolName)) {
+          const dropdownItems = toolName.map(name => {
+            return name.startsWith('-') ? { separator: true, name: 'separator-' + i } : { name: name, tool: tools[name] }
+          })
+          r.push(dropdownItems)
+        } else if (toolName.startsWith('-')) {
           r.push({ spacer: true, name: 'spacer-' + i })
           addSeparator = false // skip next separator
         } else if (toolName in tools) {
@@ -110,7 +115,6 @@ export default {
           console.warn(`[AppHeader.vue] Tool "${toolName}" is not defined in the current configuration.`)
         }
       })
-
       return r
     },
     infoPopup () {
