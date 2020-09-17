@@ -67,6 +67,9 @@ export default new Options({
       lng: 2.780
     }
   },
+  layerControl: {
+    panel: true
+  },
   layout: {
     /* components */
     header: require('components/AppHeader.vue').default,

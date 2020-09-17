@@ -38,6 +38,7 @@
           class="desktop-hide"
         />
         <q-btn
+          v-if="$config.layerControl.panel"
           flat
           round
           icon="keyboard_arrow_down"
